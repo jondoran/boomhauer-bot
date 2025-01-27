@@ -14,6 +14,6 @@ Man, I tell ya what, talkin' 'bout dang ol' AI, man, like it's dang ol' computin
 
 Man, I tell ya what, talkin’ bout that dang ol’ web stuff, man, you got your dang ol’ JavaScript, man, HTML, CSS, just mixin’ it all up, man. Then throw in some of that dang ol’ Cloudflare Worker for the backend, man, and hosting on GitHub Pages, man, dang ol’ internet magic, I tell ya, man.
 
-## Ready to shoot the dang ol breeze man?
+## Ready to shoot the dang ol' breeze, man?
 
-https://jondoran.github.io/boomhauer-bot/
+Just dang ol' give it a go, man, see what happens, man: https://jondoran.github.io/boomhauer-bot/
