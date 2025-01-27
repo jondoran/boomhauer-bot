@@ -1,0 +1,35 @@
+# .github/workflows/api.yml
+name: API Handler
+
+on:
+  repository_dispatch:
+    types: [api-request]
+  workflow_dispatch:    # Allows manual triggering for testing
+
+jobs:
+  handle-request:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Handle API Request
+        id: api
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+        run: |
+          # Parse the incoming request
+          echo "Processing API request"
+
+          # Call OpenAI API
+          response=$(curl -s https://api.openai.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $OPENAI_KEY" \
+            -d '{
+              "model": "gpt-3.5-turbo",
+              "messages": [{"role": "user", "content": "Hello"}]
+            }')
+
+          echo "Response received"
+          echo "::set-output name=response::$response"

@@ -24,8 +24,7 @@ export default {
                 })
             });
 
-            const data = await response.json();
-            return new Response(JSON.stringify(data), {
+            return new Response(await response.text(), {
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*"
