@@ -16,16 +16,17 @@ class ChatApp {
             const loadingId = this.addMessage('assistant', 'Thinking...');
 
             const response = await fetch(
-                'https://api.github.com/repos/jondoran/boomhauer-bot/actions/workflows/api.yml/dispatches',
+                'https://api.github.com/repos/jondoran/boomhauer-bot/dispatches',
                 {
                     method: 'POST',
                     headers: {
+                        'Authorization': `Bearer ${GITHUB_TOKEN}`,  // We still need this
                         'Accept': 'application/vnd.github.v3+json',
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        ref: 'main',
-                        inputs: {
+                        event_type: 'api-request',
+                        client_payload: {
                             message: content
                         }
                     })
@@ -33,7 +34,7 @@ class ChatApp {
             );
 
             if (!response.ok) {
-                throw new Error('Failed to reach workflow');
+                throw new Error('Failed to reach GitHub API');
             }
 
             const loadingMessage = document.getElementById(loadingId);
