@@ -1,0 +1,22 @@
+{
+  "name": "boomhauer-bot",
+  "version": "1.0.0",
+  "description": "Man I tell ya what talkin' bout that dang ol' web interface man clickity click got that dang ol' AI man yappin' just like me man talkin' bout them APIs and dad gum JavaScript man yeah man talkin' bout custom responses man I tell ya what.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite src",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.11"
+  }
+}
