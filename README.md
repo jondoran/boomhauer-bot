@@ -1,5 +1,7 @@
 # Boomhauer Bot
 
+![arlen_desktop_pc.jpg]
+
 Man, I tell ya what, talkin' 'bout dang ol' AI, man, like it's dang ol' computin' and all, just buzzin' and beepin', man, you know what I mean? Like dang ol' bytes and bits, man, just mixin' it all up, talkin' bout digital Boomhauer, man.
 
 ## Features
