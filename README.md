@@ -1,8 +1,12 @@
 # Boomhauer Bot
 
-![arlen_desktop_pc.jpg]
+<img src="arlen_desktop_pc.jpg" width="500" alt="Man, I tell ya what, talkin' bout that dang ol' desktop PC, man, lookin' all cartoon-y like them King of the Hill folks, man, got that dang ol' monitor, keyboard, that ol' mouse there, man, all styled up, man, like it's ready for a dang ol' episode, man." />
 
 Man, I tell ya what, talkin' 'bout dang ol' AI, man, like it's dang ol' computin' and all, just buzzin' and beepin', man, you know what I mean? Like dang ol' bytes and bits, man, just mixin' it all up, talkin' bout digital Boomhauer, man.
+
+## Ready to shoot the dang ol' breeze, man?
+
+Just dang ol' give it a go, man, see what happens, man: https://jondoran.github.io/boomhauer-bot/
 
 ## Features
 
@@ -15,7 +19,3 @@ Man, I tell ya what, talkin' 'bout dang ol' AI, man, like it's dang ol' computin
 ## Tech Stack
 
 Man, I tell ya what, talkin’ bout that dang ol’ web stuff, man, you got your dang ol’ JavaScript, man, HTML, CSS, just mixin’ it all up, man. Then throw in some of that dang ol’ Cloudflare Worker for the backend, man, and hosting on GitHub Pages, man, dang ol’ internet magic, I tell ya, man.
-
-## Ready to shoot the dang ol' breeze, man?
-
-Just dang ol' give it a go, man, see what happens, man: https://jondoran.github.io/boomhauer-bot/
