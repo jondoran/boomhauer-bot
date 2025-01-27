@@ -12,19 +12,53 @@ on:
 jobs:
   handle-request:
     runs-on: ubuntu-latest
-
     steps:
       - name: Handle API Request
         id: api
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
         run: |
-          message="${{ github.event.inputs.message }}"
+          # Get message from either workflow_dispatch or repository_dispatch
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            message="${{ github.event.inputs.message }}"
+          else
+            message="${{ github.event.client_payload.message }}"
+          fi
+
+          # Escape message for JSON
+          message=$(echo "$message" | jq -R -s '.')
+
+          # Make API call to OpenAI
           response=$(curl -s https://api.openai.com/v1/chat/completions \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $OPENAI_KEY" \
-            -d '{
-              "model": "gpt-3.5-turbo",
-              "messages": [{"role": "user", "content": "'"$message"'"}]
-            }')
-          echo "Response: $response"
+            -d "{
+              \"model\": \"gpt-3.5-turbo\",
+              \"messages\": [{\"role\": \"user\", \"content\": ${message}}]
+            }")
+
+          # Extract the response content
+          content=$(echo "$response" | jq -r '.choices[0].message.content // empty')
+
+          if [ -z "$content" ]; then
+            echo "Error: Failed to get valid response from OpenAI"
+            echo "Full response: $response"
+            exit 1
+          fi
+
+          # Set output
+          echo "response=$content" >> $GITHUB_OUTPUT
+
+      - name: Create Issue with Response
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const response = process.env.RESPONSE;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'ChatGPT Response',
+              body: response
+            });
+        env:
+          RESPONSE: ${{ steps.api.outputs.response }}
