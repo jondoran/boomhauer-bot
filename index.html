@@ -3,62 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple GPT Chat</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        #chat-container {
-            height: 60vh;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        #input-container {
-            display: flex;
-            gap: 10px;
-        }
-        #user-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:disabled {
-            background: #ccc;
-        }
-        .message {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .user-message {
-            background: #e9ecef;
-        }
-        .assistant-message {
-            background: #f8f9fa;
-        }
-    </style>
+    <title>Boomhauer Bot</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <div class="header">
+        <h1>Boomhauer Bot</h1>
+        <p>Talkin' 'bout dang ol' havin' a chat with yours truly, man.</p>
+    </div>
+
     <div id="chat-container"></div>
     <div id="input-container">
         <input type="text" id="user-input" placeholder="Type your message...">
         <button id="send-button">Send</button>
     </div>
     <script src="js/main.js"></script>
+    <div class="footer">
+        <span class="ascii-art">
+  _____
+ |  _  |
+ |     | TEXAS
+ |__|__|
+        </span>
+        <p>VIEW SOURCE CODE ON <a href="https://github.com/jondoran/boomhauer-bot" target="_blank">GITHUB</a></p>
+    </div>
 </body>
 </html>
