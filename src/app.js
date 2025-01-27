@@ -3,10 +3,45 @@ class ChatApp {
         this.messages = document.getElementById('messages');
         this.input = document.getElementById('user-input');
         this.setupEventListeners();
-        // Update these with your actual details
-        this.githubRepo = 'jondoran/boomhauer-bot';
-        // Store token in localStorage or as environment variable
-        this.githubToken = process.env.GITHUB_TOKEN || localStorage.getItem('github_token');
+    }
+
+    async handleSend() {
+        const content = this.input.value.trim();
+        if (!content) return;
+
+        this.addMessage('user', content);
+        this.input.value = '';
+
+        try {
+            const loadingId = this.addMessage('assistant', 'Thinking...');
+
+            const response = await fetch(
+                'https://api.github.com/repos/jondoran/boomhauer-bot/actions/workflows/api.yml/dispatches',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ref: 'main',
+                        inputs: {
+                            message: content
+                        }
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error('Failed to reach workflow');
+            }
+
+            const loadingMessage = document.getElementById(loadingId);
+            loadingMessage.textContent = 'Message sent successfully';
+        } catch (error) {
+            console.error('Error:', error);
+            this.addMessage('error', 'Failed to send message: ' + error.message);
+        }
     }
 
     async handleSend() {
