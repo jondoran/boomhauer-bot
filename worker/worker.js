@@ -1,23 +1,33 @@
 export default {
     async fetch(request, env) {
-      // CORS handling remains the same
+      // Get the origin from the request
+      const origin = request.headers.get("Origin");
+      const allowedOrigins = [
+        "https://jondoran.github.io",               // GitHub Pages
+        "https://fantastic-doodle-4wvp9rjjrqj27px5-8000.app.github.dev"  // Codespace
+      ];
+  
+      // Check if the origin is allowed
+      const corsHeaders = {
+        "Access-Control-Allow-Methods": "POST, GET",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Max-Age": "86400",
+      };
+  
+      // Add Access-Control-Allow-Origin if origin is allowed
+      if (allowedOrigins.includes(origin)) {
+        corsHeaders["Access-Control-Allow-Origin"] = origin;
+      }
+  
+      // Handle CORS preflight requests
       if (request.method === "OPTIONS") {
-        return new Response(null, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, GET",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Max-Age": "86400",
-          },
-        });
+        return new Response(null, { headers: corsHeaders });
       }
   
       if (request.method !== "POST") {
         return new Response("Method not allowed", { 
           status: 405,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          }
+          headers: corsHeaders
         });
       }
   
@@ -30,7 +40,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-            "OpenAI-Beta": "assistants=v2"  // Updated to v2
+            "OpenAI-Beta": "assistants=v2"
           },
           body: JSON.stringify({})
         });
@@ -47,7 +57,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-            "OpenAI-Beta": "assistants=v2"  // Updated to v2
+            "OpenAI-Beta": "assistants=v2"
           },
           body: JSON.stringify({
             role: "user",
@@ -65,7 +75,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-            "OpenAI-Beta": "assistants=v2"  // Updated to v2
+            "OpenAI-Beta": "assistants=v2"
           },
           body: JSON.stringify({
             assistant_id: env.ASSISTANT_ID
@@ -88,7 +98,7 @@ export default {
             {
               headers: {
                 "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-                "OpenAI-Beta": "assistants=v2"  // Updated to v2
+                "OpenAI-Beta": "assistants=v2"
               }
             }
           );
@@ -106,7 +116,7 @@ export default {
           {
             headers: {
               "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-              "OpenAI-Beta": "assistants=v2"  // Updated to v2
+              "OpenAI-Beta": "assistants=v2"
             }
           }
         );
@@ -130,7 +140,7 @@ export default {
         return new Response(JSON.stringify(response_data), {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            ...corsHeaders
           },
         });
   
@@ -139,7 +149,7 @@ export default {
           status: 500,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            ...corsHeaders
           },
         });
       }
