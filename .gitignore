@@ -1,3 +1,11 @@
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
 .DS_Store
-*.log
-token.js
+Thumbs.db
